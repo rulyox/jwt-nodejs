@@ -21,7 +21,7 @@ Simple implementation of JWT verification server using Node.js.
 ```json
 {
   "auth": true,
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJJZCIsImlhdCI6MTU3OTU2NjY2NiwiZXhwIjoxNTgwMTcxNDY2LCJpc3MiOiJpc3N1ZWRCeSIsInN1YiI6InVzZXJJbmZvIn0.Ag4WynaTUJaUY-FAI6l4IMHOyIySj4CkU-N0IwWkFHQ"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJJZCIsInNvbWVEYXRhIjoiYW55dGhpbmdIZXJlIiwiaWF0IjoxNTgxNzMyNTgxLCJleHAiOjE1ODIzMzczODF9.9g_AZDsFuz-EW_qxVYkxIHBFiTXtKbjYcyiaj5_Ndgk"
 }
 ```
 
@@ -53,7 +53,7 @@ Simple implementation of JWT verification server using Node.js.
 
 ```json
 {
-  "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJJZCIsImlhdCI6MTU3OTU2NjY2NiwiZXhwIjoxNTgwMTcxNDY2LCJpc3MiOiJpc3N1ZWRCeSIsInN1YiI6InVzZXJJbmZvIn0.Ag4WynaTUJaUY-FAI6l4IMHOyIySj4CkU-N0IwWkFHQ"
+  "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJJZCIsInNvbWVEYXRhIjoiYW55dGhpbmdIZXJlIiwiaWF0IjoxNTgxNzMyNTgxLCJleHAiOjE1ODIzMzczODF9.9g_AZDsFuz-EW_qxVYkxIHBFiTXtKbjYcyiaj5_Ndgk"
 }
 ```
 
@@ -62,10 +62,9 @@ Simple implementation of JWT verification server using Node.js.
 ```json
 {
   "id": "userId",
-  "iat": 1579566666,
-  "exp": 1580171466,
-  "iss": "issuedBy",
-  "sub": "userInfo",
+  "someData": "anythingHere",
+  "iat": 1581732581,
+  "exp": 1582337381,
   "auth": true
 }
 ```
@@ -76,7 +75,7 @@ Simple implementation of JWT verification server using Node.js.
 
 ```json
 {
-  "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXJJZCIsImlhdCI6MTU3OTU2NjY2NiwiZXhwIjoxNTgwMTcxNDY2LCJpc3MiOiJpc3N1ZWRCeSIsInN1YiI6InVzZXJJbmZvIn0.wrongnaTUJaUY-FAI6l4IMHOyIySj4CkU-N0IwWkFHQ"
+  "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.wrongCI6InVzZXJJZCIsInNvbWVEYXRhIjoiYW55dGhpbmdIZXJlIiwiaWF0IjoxNTgxNzMyNTgxLCJleHAiOjE1ODIzMzczODF9.9g_AZDsFuz-EW_qxVYkxIHBFiTXtKbjYcyiaj5_Ndgk"
 }
 ```
 

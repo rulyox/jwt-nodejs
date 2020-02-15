@@ -1,21 +1,20 @@
 const express = require('express');
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 
 const secret = 'thisIsSecret';
 const userPW = 'thisIsPassword';
 
-let createToken = (userId) => {
+const createToken = (userId) => {
     return new Promise((resolve, reject) => {
 
         let payload = {
-            id: userId
+            id: userId,
+            someData: 'anythingHere'
         };
 
         let options = {
-            expiresIn: '7d',
-            issuer: 'issuedBy',
-            subject: 'userInfo'
+            expiresIn: '7d'
         };
 
         jwt.sign(payload, secret, options, (error, token) => {
@@ -28,7 +27,7 @@ let createToken = (userId) => {
     });
 };
 
-let checkToken = (token) => {
+const checkToken = (token) => {
     return new Promise((resolve, reject) => {
 
         jwt.verify(token, secret, (error, decoded) => {
@@ -41,10 +40,10 @@ let checkToken = (token) => {
     });
 };
 
-let app = express();
-app.use(bodyParser.json());
+const server = express();
+server.use(bodyParser.json());
 
-app.post('/token', async (request, response) => {
+server.post('/token', async (request, response) => {
 
     let id = request.body.id;
     let pw = request.body.pw;
@@ -80,7 +79,7 @@ app.post('/token', async (request, response) => {
 
 });
 
-app.post('/check', async (request, response) => {
+server.post('/check', async (request, response) => {
 
     let token = request.body.token;
 
@@ -106,4 +105,4 @@ app.post('/check', async (request, response) => {
 
 });
 
-app.listen(8080);
+server.listen(8080, () => console.log('Server listening on port 8080!'));
