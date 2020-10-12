@@ -8,18 +8,18 @@ const userPW = 'thisIsPassword';
 const createToken = (userId) => {
     return new Promise((resolve, reject) => {
 
-        let payload = {
+        const payload = {
             id: userId,
             someData: 'anythingHere'
         };
 
-        let options = {
+        const options = {
             expiresIn: '7d'
         };
 
         jwt.sign(payload, secret, options, (error, token) => {
 
-            if (error) reject(error);
+            if(error) reject(error);
             resolve(token);
 
         });
@@ -45,63 +45,61 @@ server.use(bodyParser.json());
 
 server.post('/token', async (request, response) => {
 
-    let id = request.body.id;
-    let pw = request.body.pw;
-    let responseJson;
+    const id = request.body.id;
+    const pw = request.body.pw;
 
-    if(pw === userPW) {
+    if(pw === userPW) { // correct password
 
-        let token = await createToken(id)
-            .then((token) => {
+        try {
 
-                return token;
+            let token = await createToken(id);
 
-            }).catch((error) => {
+            const result = {
+                auth: true,
+                token: token
+            };
 
-                console.log(error);
+            response.json(result);
 
-            });
+        } catch(error) { // error
 
-        responseJson = {
-            'auth' : true,
-            'token' : token
+            console.log(error);
+            response.status(500).end();
+
+        }
+
+    } else { // wrong password
+
+        const result = {
+            auth: false
         };
 
-    } else {
-
-        responseJson = {
-            'auth' : false
-        };
+        response.json(result);
 
     }
-
-    await response.json(responseJson);
 
 });
 
 server.post('/check', async (request, response) => {
 
-    let token = request.body.token;
+    const token = request.body.token;
 
-    let responseJson = await checkToken(token)
-        .then((decoded) => {
+    try { // correct token
 
-            decoded['auth'] = true;
+        const result = await checkToken(token);
+        result['auth'] = true;
 
-            return decoded;
+        response.json(result);
 
-        })
-        .catch((error) => {
+    } catch(error) { // wrong token
 
-            console.log(error);
+        const result = {
+            auth: false
+        };
 
-            return {
-                'auth' : false
-            };
+        response.json(result);
 
-        });
-
-    await response.json(responseJson);
+    }
 
 });
 
